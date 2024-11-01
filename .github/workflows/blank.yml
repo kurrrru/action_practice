@@ -38,9 +38,9 @@
 name: Reject Push with Unallowed Files
 
 on:
-  push:  # 全てのブランチのpushを監視
+  push:
     branches:
-      - '**'
+      - '**'  # 全てのブランチを監視
 
 jobs:
   check_files:
@@ -52,7 +52,7 @@ jobs:
       - name: Check for unallowed files
         run: |
           # 許可されたファイルパターン以外のファイルが含まれているか確認
-          if git diff --cached --name-only | grep -Ev '^Makefile$|\.c$|\.h$|^[^/]+/[^/]+\.c$|^[^/]+/[^/]+\.h$'; then
-            echo "Error: Push includes unallowed files. Only Makefile, *.c, and *.h files in root and subdirectories are allowed."
+          if git diff --cached --name-only | grep -Ev '^Makefile$|\.c$|\.h$|\.yml$|^[^/]+/[^/]+\.c$|^[^/]+/[^/]+\.h$'; then
+            echo "Error: Push includes unallowed files. Only Makefile, *.c, *.h, and *.yml files in root and subdirectories are allowed."
             exit 1
           fi
