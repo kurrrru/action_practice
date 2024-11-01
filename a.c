@@ -2,5 +2,5 @@
 
 int main()
 {
-	write(STDOUT_FILENO, "a", 1);
+	write(STDOUT_FILENO, "d", 1);
 }
